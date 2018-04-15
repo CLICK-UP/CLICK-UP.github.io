@@ -12,13 +12,13 @@
     <title>CLICK-UP</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="../css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/stylish-portfolio.css" rel="stylesheet">
+    <link href="../css/stylish-portfolio.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -47,13 +47,16 @@
                 <a href="#about" onclick=$("#menu-close").click();>About</a>
             </li>
             <li>
+                <a href="#services" onclick=$("#menu-close").click();>Services</a>
+            </li>
+            <li>
                 <a href="#portfolio" onclick=$("#menu-close").click();>Portfolio</a>
             </li>
             <li>
-                <a href="#doc" onclick=$("#menu-close").click();>Doc</a>
+                <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
             </li>
             <li>
-                <a href="#contact" onclick=$("#menu-close").click();>Contact</a>
+                <a href="doc/index.html">Doc</a>
             </li>
         </ul>
     </nav>
@@ -64,9 +67,8 @@
             <h1>CLICK-UP</h1>
             <h3>Towards Software Upgrades of Click-driven Stateful Network Elements</h3>
             <br>
-            <a href="#about" class="btn btn-dark btn-lg">Get Started</a>
-            <a href="https://github.com/click-up" class="btn btn-dark btn-lg">View Source Code</a>
             <a href="#about" class="btn btn-dark btn-lg">Find Out More</a>
+            <a href="https://github.com/click-up" class="btn btn-dark btn-lg">View Source Code</a>
         </div>
     </header>
 
@@ -75,41 +77,37 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-4  text-left">
-                    <h3>Background of CLICK-UP</h3>
+                    <h3>Background of ClickP4</h3>
                     <p class="lead">
-                        The <a href="https://github.com/kohler/click">Click Modular Router</a> has been one of the most popular software 
-                        platforms that allow flexible composition of packet processing functionalities. The key strength of Click is 
-                        its inherent extensibility of functional components: a new feature can be easily implemented by composing existing 
-                        and new modules. While Click’s flexible design has satisfied many of the demands for rapid prototyping, its internal 
-                        architecture has not caught up with potential software upgrades.
+                        <a href="http://p4.org/">P4</a> has started a new era of programming networks for its
+                        ability of defining data plane behaviors. By building P4 programs, network operators can
+                        introduce diverse novel features such as network telemetry, stateful packet filtering and
+                        novel routing protocols into network devices.
                     </p>
                 </div>
                 <div class="col-lg-4 text-left">
-                    <h3>Motivations of CLICK-UP</h3>
+                    <h3>Motivations of ClickP4</h3>
                     <ul class="lead">
-                        <li> <strong>Time-consuming integration</strong>: <br>
-                            The packet-processing functionalities are out-of-work during integrating new modules. It will bring several insufficiencies in
-                            quickly recover from upgrades.
+                        <li> <strong>Complexity</strong>: Developing monolithic P4 programs from scratch is prone to
+                            errors and can be a source of complexity.
                         </li>
-                        <li> <strong>Network state loss</strong>: <br>
-                            With no mechanism to reconstruct lost network element states, stateful functionalities may be unable to correctly process packets 
-                            after upgrades, leading to service disruption.
+                        <li> <strong>Inflexibility</strong>: Features implemented by a P4 program can hardly be
+                            re-orchestrated at runtime, which reduces the flexibility of programmable networks.
                         </li>
-                        <li> <strong>Orchestration complexity</strong>: <br>
-                            Development of new modules requires intimate knowledge of complex library implementation, let alone correctly restore states. 
-                            It is frustrating that the visibility of upgrades is poor and the learning curve is rather steep.
+                        <li> <strong>Unreliability</strong>: There is no isolation mechanism for network policies to
+                            protect themselves from being enforced by undesired features.
                         </li>
                     </ul>
                 </div>
                 <div class="col-lg-4 text-left">
-                    <h3>CLICK-UP Offers</h3>
-                    <p class="lead"> CLICK-UP, which is the effort towards software upgrades of Click-driven stateful network elements.</p>
+                    <h3>ClickP4 Offers</h3>
+                    <p class="lead"> ClickP4 is proposed as a policy-aware modular programming architecture for P4.</p>
                     <ul class="lead">
-                        <li> <strong>Low-load</strong> integrating essential modules explicitly in a service context aware manner.
+                        <li> <strong>Simplicity</strong> for building P4 programs
                         </li>
-                        <li> <strong>Stateful</strong> cares for network state maintaining during software upgrages.
+                        <li> <strong>Flexibility</strong> for orchestrating program features
                         </li>
-                        <li> <strong>Friendly</strong> exoskeleton of Click modularity with a lightweight runtime library.
+                        <li> <strong>Reliability</strong> for enforcing network policies
                         </li>
                     </ul>
                 </div>
@@ -125,45 +123,25 @@
 
     <!-- Services -->
     <!-- The circle icons use Font Awesome's stacked icon classes. For more information, visit http://fontawesome.io/examples/ -->
-    <section id="portfolio" class="services bg-primary">
+    <section id="services" class="services bg-primary">
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>CLICK-UP Framework</h2>
+                    <h2>ClickP4 Framework</h2>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
+                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Module Integration</strong>
+                                    <strong>ClickP4 Core</strong>
                                 </h4>
-                                <p>The service context aware module integration scheme of CLICK-UP.
-                                    The functionality-neutral modules won't be shipped with redundantly.
-                                    <br>
-                                    <br>
-                                </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3 col-sm-6">
-                            <div class="service-item">
-                                <span class="fa-stack fa-4x">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
-                                <h4>
-                                    <strong>State Safe</strong>
-                                </h4>
-                                <p>The state safe schme of CLICK-UP. This is enforced inside the integrated modules 
-                                    with a state synchronization design.
-                                    <br>
-                                    <br>
-                                </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
+                                <p>The core code of ClickP4 framework. It supports for composition of modules and
+                                    defines the special nodes in ClickP4, such as Rewinder and Initializer.</p>
+                                <a href="https://github.com/clickp4/clickp4/tree/master/src/core" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -173,30 +151,41 @@
                                 <i class="fa fa-compass fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Runtime Library</strong>
+                                    <strong>ClickP4 Modules</strong>
                                 </h4>
-                                <p>The lightweight runtime library of CLICK-UP. This is embraced for clarifying service semantics, simplifying tedious
-                                    orchestration and unifying interfaces.
-                                   <br>
+                                <p>The module repository of ClickP4. Operators can composes various modules to a
+                                    static P4 program by registering the required modules in the configuretion files.
                                 </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
+                                <a href="https://github.com/clickp4/clickp4/tree/master/src/module" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-cloud fa-stack-1x text-primary"></i>
+                                <i class="fa fa-flask fa-stack-1x text-primary"></i>
                             </span>
                                 <h4>
-                                    <strong>Dashboard</strong>
+                                    <strong>ClickP4 Module Context</strong>
                                 </h4>
-                                <p>The dashboard of CLICK-UP. Operators can interact with the GUI and conduct their upgrade intends. 
-                                    <br>
-                                    <br>
-                                    <br>
+                                <p>Context of the modules. All components in the context and shared globally. And
+                                    the context can beused to express dependencies among modules.</p>
+                                <a href="https://github.com/clickp4/clickp4/tree/master/src/context" class="btn btn-light">Learn More</a>
+                            </div>
+                        </div>
+                        <div class="col-md-3 col-sm-6">
+                            <div class="service-item">
+                                <span class="fa-stack fa-4x">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-shield fa-stack-1x text-primary"></i>
+                            </span>
+                                <h4>
+                                    <strong>ClickP4 Protocol</strong>
+                                </h4>
+                                <p>Protocol definitions for ClickP4. Developers can extend the protocol stack by adding
+                                    componennts into ClickP4. Besides, it also defines the packets parser.
                                 </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
+                                <a href="https://github.com/clickp4/clickp4/tree/master/src/protocol" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -210,15 +199,14 @@
     </section>
 
     <!-- Callout -->
-    <aside id="doc" class="callout">
+    <aside class="callout">
         <div class="text-vertical-center">
-            <h1>Orchestrating software upgrades of stateful network elements with simpilicity, flexibility and high efficiency! </h1>
+            <h1>Building and runnning programmable networks with simpilicity, flexibility and reliability! </h1>
         </div>
     </aside>
 
     <!-- Portfolio -->
-    <!--
-    <section id="portfolio" class="portfolio">
+    <section id="portfolio" class="portfolio hidden">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
@@ -254,20 +242,24 @@
                             </div>
                         </div>
                     </div>
+                    <!-- /.row (nested) -->
                     <a href="#" class="btn btn-dark">View More Items</a>
                 </div>
+                <!-- /.col-lg-10 -->
             </div>
+            <!-- /.row -->
         </div>
+        <!-- /.container -->
     </section>
-    -->
 
     <!-- Call to Action -->
-    <aside id="contact" class="call-to-action bg-primary">
+    <aside class="call-to-action bg-primary hiden">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>More details of CLICK-UP project can be found in the document</h3>
-                    <a href="doc/index.html" class="btn btn-lg btn-dark">View Document</a>
+                    <h3>The buttons below are impossible to resist.</h3>
+                    <a href="#" class="btn btn-lg btn-light">Click Me!</a>
+                    <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
                 </div>
             </div>
         </div>
@@ -283,18 +275,17 @@
         </small>
     </section>
     -->
-
     <!-- Footer -->
     <footer>
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h4><strong>CLICK-UP Project</strong>
+                    <h4><strong>ClickP4</strong>
                     </h4>
-                    <p>Dalian University of Technology
-                        <br>Dalian, 116024</p>
+                    <p>FIT 4-204, Tsinghua University
+                        <br>Beijing, 100084</p>
                     <ul class="list-unstyled">
-                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:wangjunxiao@live.com">wangjunxiao@live.com</a>
+                        <li><i class="fa fa-envelope-o fa-fw"></i> <a href="mailto:yuz.thu@gmail.com">yuz.thu@gmail.com</a>
                         </li>
                     </ul>
                     <br>
@@ -312,7 +303,17 @@
                     </ul>
                     -->
                     <hr class="small">
-                    <p class="text-muted">Copyright &copy; NCC Lab 2018</p>
+                    <p class="text-muted">Copyright &copy; NetArch Lab 2017</p>
+                    <br>
+                    <img src="../pic/update_time_original.png" width="45%" />
+                    <img src="../pic/update_time_comparision.png" width="45%" />
+                    <br>
+                    <img src="../pic/tran_time_original.png" width="45%" />
+                    <img src="../pic/tran_time_comparision.png" width="45%" />
+                    <br>
+                    <img src="../pic/tran_time2_original.png" width="45%" />
+                    <img src="../pic/tran_time2_comparision.png" width="45%" />
+
                 </div>
             </div>
         </div>
@@ -320,10 +321,10 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="../js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
     <script>
