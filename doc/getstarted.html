@@ -44,10 +44,10 @@
                 <a href="../index.html" onclick=$("#menu-close").click();>Home</a>
             </li>
             <li>
-                <a href="getstarted.html" onclick=$("#menu-close").click();>Get Started</a>
+                <a href="#top" onclick=$("#menu-close").click();>Get Started</a>
             </li>
             <li>
-                <a href="#top" onclick=$("#menu-close").click();>Introduction</a>
+                <a href="index.html" onclick=$("#menu-close").click();>Introduction</a>
             </li>
             <li>
                 <a href="motivation.html" onclick=$("#menu-close").click();>Motivation</a>
@@ -62,7 +62,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h1><strong>CLICK-UP: Introduction</strong></h1>
+                    <h1><strong>CLICK-UP: Get Started</strong></h1>
                 </div>
             </div>
         </div>
@@ -74,35 +74,19 @@
                     <br>
                     <br>
                     <p class="lead">
-                        In the productive scenario of virtualized network function (vnf), software upgrades of active network elements always happen due to current ones cannot provide satisfactory functionalities, or caused by some high-level reasons e.g. business upgrading.
-                        Thus original network elements have to be re-formulated to adapt to their future work. First, we should say thanks to the evolution brought by vnf. Its appearance actually gives us a new chance to replace traditional hardware-based upgrades with software style and increases the cost-efficiency as well the technology iterative speed.
+                        In order to further demonstrate the effectiveness and convenience of CLICK-UP, we offer a software upgrade walkthrough of firewall network element. We hope to demonstrate the agility of module integration by including a large number of new modules upgraded in the demo, and checking its downtime compared to traditional manners. We also plan to demonstrate the state persistency by including tcp session states in the demo, and observing the negative influence of state loss compared to our state reconstruction case.
                     </p>
                     <p class="lead">
-                        Second, the <a href="https://github.com/kohler/click">Click</a>-driven platform has been one of the most popular
-                        vnf platforms that allow flexible composition of packet processing functionalities. It has been used in a number of
-                        application prototypes such as a router for a future Internet architecture, redundant traffic elimination systems, a scalable
-                        middlebox platform, and a cluster-based high performance software router, just to name a few. 
+                        <a href="http://hilite.me/">http://hilite.me/</a> can converts the code snippets into pretty-printed HTML format. just like:
                     </p>
-                    <p class="lead">
-                        The key strength of Click is its inherent extensibility of functional components: a new feature can be easily implemented by composing existing and new modules. While Click’s flexible design has satisfied many of the demands for rapid prototyping, its internal architecture has not caught up with potential software upgrades. Traditional Click-driven network element upgrades have some significant <i><b>drawbacks</b></i>: 
-                    </p>
-                    <p class="lead">
-                        <i><b>D1</b></i>: Integrating new modules with upgraded network elements is a time-consuming process. During this process, however, the packet-processing functionalities are out-of-work. This will bring several insufficiencies including the ability to elastically scale the network functions on demand and quickly recover from upgrades.
-                    </p>
-                    <p class="lead">
-                        <i><b>D2</b></i>: With no mechanism to reconstruct lost network element states, stateful functionalities may be unable to correctly process packets after upgrades, leading to service disruption. This may resolve around states such as connection information in a stateful firewall, substring matches in an intrusion detection system, address mappings in a network address translator, or server mappings in a stateful load balancer.
-                    </p>
-                    <p class="lead">
-                        <i><b>D3</b></i>: Development of new modules requires intimate knowledge of complex library implementation, let alone correctly restore states. It is frustrating that the visibility of upgrades is poor and the learning curve is rather steep.
-                    </p>
-                    <p class="lead">
-                        In order to solve these problems and satisfy practical requirements of stateful network element upgrades, we present CLICK-UP, which is the effort towards software upgrades of Click-driven stateful network elements.
-                    </p>
-                    <p class="lead">
-                        For one thing, we notice the root of <i><b>D1</b></i> is that the software integration of upgrades didn’t stick religiously to the service context. Therefore a series of functionality-neutral modules are redundantly shipped with essential modules. Explicitly integrating essential modules in a service context aware manner can cut down upgrade overheads. (solution of <i><b>D1</b></i>). For another, current Click modularity still poses challenges in network state maintaining during software upgrages. We cannot expect the operators originating the network elements to manage any problem, thus, a state synchronization scheme which is enforced inside the integrated modules is essential. (solution of <i><b>D2</b></i>). At last, as the exoskeleton of Click modularity, a lightweight runtime library is also necessary to be embraced for clarifying service semantics, simplifying tedious orchestration and unifying interfaces. (solution of <i><b>D3</b></i>).
-                    </p>
-                    <p class="lead">
-                        Besides the low-load, stateful and tractable features in software upgrades, CLICK-UP also stands out because of its compatibility.The seamless instead of invasive integration with current Click-driven techniques, such as <a href="http://cnp.neclab.eu/projects/clickos/">ClickOS</a>, <a href="https://ccronline.sigcomm.org/wp-content/uploads/2016/11/sigcomm-ccr-final57.pdf">CliMB</a> and <a href="https://github.com/kohler/click/pull/162">FastClick</a>.
+                    <p>
+                        <!-- HTML generated using hilite.me -->
+                        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
+                            <pre style="margin: 0; line-height: 125%">
+                                <span style="color: #cdcd00">print</span>
+                                <span style="color: #cd0000">&#39;hello world!&#39;</span>
+                            </pre>
+                        </div>
                     </p>
                 </div>
             </div>
@@ -118,7 +102,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h2><a href="motivation.html">Go-to Next Section: Motivation</a>&nbsp;&nbsp;
+                    <h2><a href="https://github.com/click-up">See Download to Get the Relevant Code</a>&nbsp;&nbsp;
                     </h2> 
                 </div>
 

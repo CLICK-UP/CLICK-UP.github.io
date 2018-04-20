@@ -47,10 +47,10 @@
                 <a href="getstarted.html" onclick=$("#menu-close").click();>Get Started</a>
             </li>
             <li>
-                <a href="#top" onclick=$("#menu-close").click();>Introduction</a>
+                <a href="index.html" onclick=$("#menu-close").click();>Introduction</a>
             </li>
             <li>
-                <a href="motivation.html" onclick=$("#menu-close").click();>Motivation</a>
+                <a href="#top" onclick=$("#menu-close").click();>Motivation</a>
             </li>
             <li>
                 <a href="architecture.html" onclick=$("#menu-close").click();>Architecture</a>
@@ -62,7 +62,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h1><strong>CLICK-UP: Introduction</strong></h1>
+                    <h1><strong>CLICK-UP: Motivation</strong></h1>
                 </div>
             </div>
         </div>
@@ -74,39 +74,36 @@
                     <br>
                     <br>
                     <p class="lead">
-                        In the productive scenario of virtualized network function (vnf), software upgrades of active network elements always happen due to current ones cannot provide satisfactory functionalities, or caused by some high-level reasons e.g. business upgrading.
-                        Thus original network elements have to be re-formulated to adapt to their future work. First, we should say thanks to the evolution brought by vnf. Its appearance actually gives us a new chance to replace traditional hardware-based upgrades with software style and increases the cost-efficiency as well the technology iterative speed.
+                        In the term of software upgrades of stateful network elements, fast recovery from downtime and strict avoidance on service disruption are two critial principles for guaranteeing performance and enhancing scalability. On one hand, the upgrade recovery speed of a network element is mainly affected by its module integration time. While Click’s flexible design has satisfied many of the demands for rapid prototyping, its internal architecture seems not caught up with potential software upgrades. Traditional Click-driven network element upgrades is a time-consuming process, since the software integration of upgrades didn’t stick religiously to the service context. Therefore a series of functionality-neutral modules are redundantly shipped with essential modules.
                     </p>
                     <p class="lead">
-                        Second, the <a href="https://github.com/kohler/click">Click</a>-driven platform has been one of the most popular
-                        vnf platforms that allow flexible composition of packet processing functionalities. It has been used in a number of
-                        application prototypes such as a router for a future Internet architecture, redundant traffic elimination systems, a scalable
-                        middlebox platform, and a cluster-based high performance software router, just to name a few. 
+                        <center><img src="../pic/update_time_original.png" width="45%" /></center>
                     </p>
                     <p class="lead">
-                        The key strength of Click is its inherent extensibility of functional components: a new feature can be easily implemented by composing existing and new modules. While Click’s flexible design has satisfied many of the demands for rapid prototyping, its internal architecture has not caught up with potential software upgrades. Traditional Click-driven network element upgrades have some significant <i><b>drawbacks</b></i>: 
+                        As shown in the above figure, we integrate various number of new modules into upgraded network element in a Click-native manner, and observe their integration latency. The latency is 3.806s when the number of itegrated new module is 1, and increases to 5.652s when the number becomes 5. Besides, if one software upgrade starts a new network element from scatch, involving a comparable module number size with commercial network elements (with about 45 modules), the latency will become 14.459s. In fact, the result does not look good. For the most common number range of integraded new modules, i.e. 1-5, an ideal integration should with sub-millisecond latency instead of current sub-second latency. Therefore, explicitly integrating essential modules in a service context aware manner may be the breakthrough for cutting down upgrade overheads and speeding up recovery.
+
                     </p>
                     <p class="lead">
-                        <i><b>D1</b></i>: Integrating new modules with upgraded network elements is a time-consuming process. During this process, however, the packet-processing functionalities are out-of-work. This will bring several insufficiencies including the ability to elastically scale the network functions on demand and quickly recover from upgrades.
+                        On the other hand, the avoidance on service disruption or not is determined by whether the service states of stateful network elements can be correctly reconstructed after upgrades. However, unfortunately, with no Click-native mechanism to reconstruct lost network element states, stateful functionalities may be unable to correctly process packets after upgrades, leading to service disruption.
                     </p>
                     <p class="lead">
-                        <i><b>D2</b></i>: With no mechanism to reconstruct lost network element states, stateful functionalities may be unable to correctly process packets after upgrades, leading to service disruption. This may resolve around states such as connection information in a stateful firewall, substring matches in an intrusion detection system, address mappings in a network address translator, or server mappings in a stateful load balancer.
+                        <center><img src="../pic/tran_time_original.png" width="45%" /></center>
                     </p>
                     <p class="lead">
-                        <i><b>D3</b></i>: Development of new modules requires intimate knowledge of complex library implementation, let alone correctly restore states. It is frustrating that the visibility of upgrades is poor and the learning curve is rather steep.
+                        As shown in the above figure, a 2Gb-size file is transmitted through a nat network element, whose software upgrade happens with partial file transmitted. The upgraded nat network element conducts port mapping according to the service states of file transmission session. If the states are lost after upgrade, the original transmission progress will be reset from the beginning of the file, and waste the previous transmission progress before the upgrade happens. When no upgrade happens during the file transmission (x-axis coordinate is 0%), the total transmission time is 43.218s. When the upgrade happens with 40% file transmitted, the time becomes 63.599s. Note this figure is based on that the duration of the upgrade is transient enough.
                     </p>
                     <p class="lead">
-                        In order to solve these problems and satisfy practical requirements of stateful network element upgrades, we present CLICK-UP, which is the effort towards software upgrades of Click-driven stateful network elements.
+                        <center><img src="../pic/tran_time2_original.png" width="45%" /></center>
                     </p>
                     <p class="lead">
-                        For one thing, we notice the root of <i><b>D1</b></i> is that the software integration of upgrades didn’t stick religiously to the service context. Therefore a series of functionality-neutral modules are redundantly shipped with essential modules. Explicitly integrating essential modules in a service context aware manner can cut down upgrade overheads. (solution of <i><b>D1</b></i>). For another, current Click modularity still poses challenges in network state maintaining during software upgrages. We cannot expect the operators originating the network elements to manage any problem, thus, a state synchronization scheme which is enforced inside the integrated modules is essential. (solution of <i><b>D2</b></i>). At last, as the exoskeleton of Click modularity, a lightweight runtime library is also necessary to be embraced for clarifying service semantics, simplifying tedious orchestration and unifying interfaces. (solution of <i><b>D3</b></i>).
-                    </p>
+                        As shown in the above figure, let us obeserve the changes when the duration of upgrades is different and the upgrade happens with 50% file transmitted. When the upgrade delay is 1s, the total transmission time is 68.810s. When the upgrade delay is 5s, the time becomes 77.837s. Besides, there are two sudden changes in the figure, i.e. x-axis coordinates 6-7 and 12-13. This is caused by tcp retransmission idleness. It further means that the waste time not only includes the 50% file transmission time, but also involves the upgrade downtime, and file transmission session reconstruction time. Briefly, it is obvious that state loss will cause service disruption and demage performance, and current Click modularity still poses challenges in network state maintaining during software upgrages. We cannot expect the operators originating the network elements to manage any problem, thus, a state synchronization scheme which is enforced inside the integrated modules is essential.
                     <p class="lead">
-                        Besides the low-load, stateful and tractable features in software upgrades, CLICK-UP also stands out because of its compatibility.The seamless instead of invasive integration with current Click-driven techniques, such as <a href="http://cnp.neclab.eu/projects/clickos/">ClickOS</a>, <a href="https://ccronline.sigcomm.org/wp-content/uploads/2016/11/sigcomm-ccr-final57.pdf">CliMB</a> and <a href="https://github.com/kohler/click/pull/162">FastClick</a>.
+                        All in all, in order to solve these problems and satisfy practical requirements of stateful network element upgrades, we present CLICK-UP, which is the effort towards software upgrades of Click-driven stateful network elements.
                     </p>
                 </div>
             </div>
-    </div>
+        </div>
+
 
 
     <!-- Footer -->
@@ -118,10 +115,10 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h2><a href="motivation.html">Go-to Next Section: Motivation</a>&nbsp;&nbsp;
+                    <h2><a href="index.html">Go-to Last Section: Introduction</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a href="architecture.html">Go-to Next Section: Architecture</a>
                     </h2> 
                 </div>
-
             </div>
         </div>
     </aside>

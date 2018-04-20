@@ -47,13 +47,13 @@
                 <a href="getstarted.html" onclick=$("#menu-close").click();>Get Started</a>
             </li>
             <li>
-                <a href="#top" onclick=$("#menu-close").click();>Introduction</a>
+                <a href="index.html" onclick=$("#menu-close").click();>Introduction</a>
             </li>
             <li>
                 <a href="motivation.html" onclick=$("#menu-close").click();>Motivation</a>
             </li>
             <li>
-                <a href="architecture.html" onclick=$("#menu-close").click();>Architecture</a>
+                <a href="#top" onclick=$("#menu-close").click();>Architecture</a>
             </li>
         </ul>
     </nav>
@@ -62,7 +62,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h1><strong>CLICK-UP: Introduction</strong></h1>
+                    <h1><strong>CLICK-UP: Architecture</strong></h1>
                 </div>
             </div>
         </div>
@@ -74,39 +74,54 @@
                     <br>
                     <br>
                     <p class="lead">
-                        In the productive scenario of virtualized network function (vnf), software upgrades of active network elements always happen due to current ones cannot provide satisfactory functionalities, or caused by some high-level reasons e.g. business upgrading.
-                        Thus original network elements have to be re-formulated to adapt to their future work. First, we should say thanks to the evolution brought by vnf. Its appearance actually gives us a new chance to replace traditional hardware-based upgrades with software style and increases the cost-efficiency as well the technology iterative speed.
+                        <strong>Architecture Overview</strong>: As shown in the following figure, the framework of CLICK-UP is divided into top-down three layers. The three layers collectively constitute the software upgrade of Click-driven stateful network elements. 
+
                     </p>
                     <p class="lead">
-                        Second, the <a href="https://github.com/kohler/click">Click</a>-driven platform has been one of the most popular
-                        vnf platforms that allow flexible composition of packet processing functionalities. It has been used in a number of
-                        application prototypes such as a router for a future Internet architecture, redundant traffic elimination systems, a scalable
-                        middlebox platform, and a cluster-based high performance software router, just to name a few. 
+                        <center><img src="../pic/clickup_framework.png" width="50%" /></center>
                     </p>
                     <p class="lead">
-                        The key strength of Click is its inherent extensibility of functional components: a new feature can be easily implemented by composing existing and new modules. While Click’s flexible design has satisfied many of the demands for rapid prototyping, its internal architecture has not caught up with potential software upgrades. Traditional Click-driven network element upgrades have some significant <i><b>drawbacks</b></i>: 
+                        Contrast with native processing, operators directly interact with the DAG orchestrator and formulate their required atom-based pipeline in view of provided runtime library, getting ride of inefficient manners. During the alternative processing, the dependency of essential modules is explored according to the service context in the determined DAG pipeline. This helps in cutting down the overheads of module integration, and also speeds up recovery from downtime in most cases.
                     </p>
                     <p class="lead">
-                        <i><b>D1</b></i>: Integrating new modules with upgraded network elements is a time-consuming process. During this process, however, the packet-processing functionalities are out-of-work. This will bring several insufficiencies including the ability to elastically scale the network functions on demand and quickly recover from upgrades.
+                        <center><img src="../pic/clickup_architecture.png" width="100%" /></center>
                     </p>
                     <p class="lead">
-                        <i><b>D2</b></i>: With no mechanism to reconstruct lost network element states, stateful functionalities may be unable to correctly process packets after upgrades, leading to service disruption. This may resolve around states such as connection information in a stateful firewall, substring matches in an intrusion detection system, address mappings in a network address translator, or server mappings in a stateful load balancer.
+                        The state reconstruction is considered by periodic synchronization between modules and persistent storage, which respectively locates at kernel space and user space. With the recovery bootstrap further integrated in the modules, their former service states can thus be recaptured.
+
                     </p>
                     <p class="lead">
-                        <i><b>D3</b></i>: Development of new modules requires intimate knowledge of complex library implementation, let alone correctly restore states. It is frustrating that the visibility of upgrades is poor and the learning curve is rather steep.
+                        <strong>Workflow</strong>: The procedures for CLICK-UP to handle a software upgrade of click-driven stateful network elements are shown as arrow direction in the above figure: 
+                    </p>
+                    <ul class="lead">
+                        <li>
+                            (1) the dashboard exposes DAG orchestrator to operators, allowing operators to define their upgrade needs as a DAG, which is based on well-known semantics and consists of a series of pipeline processing related atom functionalities as well their required service states.
+                        </li>
+                        <li>
+                            (2) the DAG should be resolved as a set of Click modules (called elements), and its new state collection is integrated into corresponding modules along with dedicated state synchronization mechanism and state reconstruction bootstrap. 
+                        </li>
+                        <li>
+                            (3) The modules are complied, built into kernel space, and the persistent storage in user space is initialized with new version number, sending back former version related states. 
+                        </li>
+                        <li>
+                            (4) The new configuration is created and the upgraded network element is reboot from downtime with former service states fulfilled by recovery bootstrap. 
+                        </li>        
+                    </ul>
+                    <p class="lead">
+                        <center><img src="../pic/states.png" width="55%" /></center>
                     </p>
                     <p class="lead">
-                        In order to solve these problems and satisfy practical requirements of stateful network element upgrades, we present CLICK-UP, which is the effort towards software upgrades of Click-driven stateful network elements.
+                        <strong>Atom-based Orchestration</strong>: As shown in the above figure, the DAG orchestration of CLICK-UP is based on a series of core functionalities called atom functionalities, e.g. packet parsing, payload modification, and the like, each of which with well-known semantices. Operators can thus represent their upgrade needs as a DAG with stateful or stateless atoms linked. Via exploring the dependency of essential modules, the runtime library will resolve the atom-based graph as a module-based graph that has identical service contexts and pipeline functionalities. This realizes an unified interface and for operators, at the same time guarantees the compatibility between CLICK-UP and other Click-driven techniques that consists of module-based graph. Besides, since this sticks religiously to the service context, therefore a series of functionality-neutral modules won’t shipped with essential modules, significantly reducing integration time.
                     </p>
                     <p class="lead">
-                        For one thing, we notice the root of <i><b>D1</b></i> is that the software integration of upgrades didn’t stick religiously to the service context. Therefore a series of functionality-neutral modules are redundantly shipped with essential modules. Explicitly integrating essential modules in a service context aware manner can cut down upgrade overheads. (solution of <i><b>D1</b></i>). For another, current Click modularity still poses challenges in network state maintaining during software upgrages. We cannot expect the operators originating the network elements to manage any problem, thus, a state synchronization scheme which is enforced inside the integrated modules is essential. (solution of <i><b>D2</b></i>). At last, as the exoskeleton of Click modularity, a lightweight runtime library is also necessary to be embraced for clarifying service semantics, simplifying tedious orchestration and unifying interfaces. (solution of <i><b>D3</b></i>).
+                        <center><img src="../pic/states_2.png" width="55%" /></center>
                     </p>
                     <p class="lead">
-                        Besides the low-load, stateful and tractable features in software upgrades, CLICK-UP also stands out because of its compatibility.The seamless instead of invasive integration with current Click-driven techniques, such as <a href="http://cnp.neclab.eu/projects/clickos/">ClickOS</a>, <a href="https://ccronline.sigcomm.org/wp-content/uploads/2016/11/sigcomm-ccr-final57.pdf">CliMB</a> and <a href="https://github.com/kohler/click/pull/162">FastClick</a>.
-                    </p>
+                        <strong>Runtime Library</strong>: As shown in the above figure, the runtime library of CLICK-UP consists of a set of interfaces exposed to orchestration. They specify the available atom functionalities and the mapping between the atoms and the module category. The atom-based graph that don’t fit comfortably within the module category's range can also be formulated as new modules and put into the extended category. Besides, these interfaces provide a state management to deal with the state synchronization and reconstruction. Through top-down integration, the modules in upgraded network elements can recover from downtime in an agile manner and take back their service states correctly.
                 </div>
             </div>
-    </div>
+        </div>
+
 
 
     <!-- Footer -->
@@ -118,10 +133,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h2><a href="motivation.html">Go-to Next Section: Motivation</a>&nbsp;&nbsp;
+                    <h2><a href="motivation.html">Go-to Last Section: Motivation</a>&nbsp;&nbsp;&nbsp;&nbsp;
                     </h2> 
                 </div>
-
             </div>
         </div>
     </aside>
