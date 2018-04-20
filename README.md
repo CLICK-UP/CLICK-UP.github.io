@@ -1,11 +1,3 @@
-# ClickP4 : Policy-Aware Modular Programming of P4
+# CLICK-UP: Towards Software Upgrades of Click-driven Stateful Network Elements
 
-## Background & Motiviation
-
-## Contributions
-
-## Source Code
-
-## Modules
-
-## Evaluation
+## Hello World
