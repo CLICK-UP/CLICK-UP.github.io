@@ -74,50 +74,49 @@
                     <br>
                     <br>
                     <p class="lead">
-                        <strong>Architecture Overview</strong>: As shown in the following figure, the framework of CLICK-UP is divided into top-down three layers. The three layers collectively constitute the software upgrade of Click-driven stateful network elements. 
+                        <strong>Architecture Overview</strong>: As shown in the following figure, the framework of CLICK-UP is divided into the top-down three layers. The three layers collectively constitute the software upgrade of Click-driven stateful network elements. 
 
                     </p>
                     <p class="lead">
                         <center><img src="../pic/clickup_framework.png" width="50%" /></center>
                     </p>
                     <p class="lead">
-                        Contrast with native processing, operators directly interact with the DAG orchestrator and formulate their required atom-based pipeline in view of provided runtime library, getting ride of inefficient manners. During the alternative processing, the dependency of essential modules is explored according to the service context in the determined DAG pipeline. This helps in cutting down the overheads of module integration, and also speeds up recovery from downtime in most cases.
+                        In contrast with native processing, operators directly interact with the DAG orchestrator and formulate their required atom-based pipeline in a view of runtime library, getting ride of previous inefficient manual manners. During the alternative processing, all the dependency of essential modules are fully explored according to the determined service context in DAG pipeline. This can help in cutting down unnecessary overheads of module integration, and speed up the recovery from downtime as far as possible.
                     </p>
                     <p class="lead">
                         <center><img src="../pic/clickup_architecture.png" width="100%" /></center>
                     </p>
                     <p class="lead">
-                        The state reconstruction is considered by periodic synchronization between modules and persistent storage, which respectively locates at kernel space and user space. With the recovery bootstrap further integrated in the modules, their former service states can thus be recaptured.
-
+                        The reconstruction scheme for lost states is implemented by periodic synchronization between modules and persistent storage, which respectively locates at kernel space and user space. With recovery bootstrap integrated inside all the modules, the states can thus be recaptured after upgrade.
                     </p>
                     <p class="lead">
-                        <strong>Workflow</strong>: The procedures for CLICK-UP to handle a software upgrade of click-driven stateful network elements are shown as arrow direction in the above figure: 
+                        <strong>Workflow</strong>: The procedures for CLICK-UP to handle a software upgrade of Click-driven stateful network elements are shown as arrow direction in the above figure: 
                     </p>
                     <ul class="lead">
                         <li>
-                            (1) the dashboard exposes DAG orchestrator to operators, allowing operators to define their upgrade needs as a DAG, which is based on well-known semantics and consists of a series of pipeline processing related atom functionalities as well their required service states.
+                            (1) the dashboard exposes DAG orchestrator to operators, allowing operators to define their upgrade needs as a DAG. The DAG is based on well-known semantics and consists of a series of pipeline processing related atom functionalities as well their required service states.
                         </li>
                         <li>
-                            (2) the DAG should be resolved as a set of Click modules (called elements), and its new state collection is integrated into corresponding modules along with dedicated state synchronization mechanism and state reconstruction bootstrap. 
+                            (2) the DAG should be parsed to a set of Click modules (called elements), and its new state collection is integrated into corresponding modules. All the modules have a state synchronization mechanism and a state reconstruction bootstrap.
                         </li>
                         <li>
-                            (3) The modules are complied, built into kernel space, and the persistent storage in user space is initialized with new version number, sending back former version related states. 
+                            (3) the modules are complied, built into kernel space, and the persistent storage in user space is initialized with new version number, meanwhile sending back former version related states.
                         </li>
                         <li>
-                            (4) The new configuration is created and the upgraded network element is reboot from downtime with former service states fulfilled by recovery bootstrap. 
+                            (4) the new configuration is created and upgraded network element is reboot from downtime with former service states fulfilled by a recovery bootstrap.
                         </li>        
                     </ul>
                     <p class="lead">
                         <center><img src="../pic/states.png" width="55%" /></center>
                     </p>
                     <p class="lead">
-                        <strong>Atom-based Orchestration</strong>: As shown in the above figure, the DAG orchestration of CLICK-UP is based on a series of core functionalities called atom functionalities, e.g. packet parsing, payload modification, and the like, each of which with well-known semantices. Operators can thus represent their upgrade needs as a DAG with stateful or stateless atoms linked. Via exploring the dependency of essential modules, the runtime library will resolve the atom-based graph as a module-based graph that has identical service contexts and pipeline functionalities. This realizes an unified interface and for operators, at the same time guarantees the compatibility between CLICK-UP and other Click-driven techniques that consists of module-based graph. Besides, since this sticks religiously to the service context, therefore a series of functionality-neutral modules won’t shipped with essential modules, significantly reducing integration time.
+                        <strong>Atom-based Orchestration</strong>: As shown in the above figure, the DAG orchestration of CLICK-UP is based on a series of core functionalities called atom functionalities, e.g. packet parsing, payload modification, and the like, each of which with well-known semantics. Operators can thus represent their upgrade needs as a DAG with stateful or stateless atoms linked. Via exploring all the dependency of essential modules, runtime library will parse the atom-based graph to a module-based graph that has identical service contexts and pipeline functionalities. This realizes an unified interface for operators, at the same time provides the compatibility between CLICK-UP and other Click-driven techniques that based on module-style graph. Moreover, since the orchestration sticks religiously to the service context, thus a series of functionality-neutral modules won’t shipped with essential modules any more, significantly reducing the integration time.
                     </p>
                     <p class="lead">
                         <center><img src="../pic/states_2.png" width="55%" /></center>
                     </p>
                     <p class="lead">
-                        <strong>Runtime Library</strong>: As shown in the above figure, the runtime library of CLICK-UP consists of a set of interfaces exposed to orchestration. They specify the available atom functionalities and the mapping between the atoms and the module category. The atom-based graph that don’t fit comfortably within the module category's range can also be formulated as new modules and put into the extended category. Besides, these interfaces provide a state management to deal with the state synchronization and reconstruction. Through top-down integration, the modules in upgraded network elements can recover from downtime in an agile manner and take back their service states correctly.
+                        <strong>Runtime Library</strong>: As shown in the above figure, the runtime library of CLICK-UP consists of a set of interfaces exposed to the orchestration. They specify available atom functionalities as well the mapping between atoms and module category. These interfaces also provide a state management toolset to deal with the state synchronization and the reconstruction bootstrap. Through top-down integration, all the modules of upgraded network elements can thus recover from downtime in an agile manner and take back their service states correctly. Developers can also enlarge current library stack in scalability by implementing new interfaces for new atoms or states, in order to handle the cases that atom-based graph doesn’t fit comfortably within upgrade needs’ range.
                 </div>
             </div>
         </div>

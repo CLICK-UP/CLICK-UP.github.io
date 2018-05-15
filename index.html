@@ -77,27 +77,27 @@
                 <div class="col-lg-4  text-left">
                     <h3>Background of CLICK-UP</h3>
                     <p class="lead">
-                        The <a href="https://github.com/kohler/click">Click Modular Router</a> has been one of the most popular software 
-                        platforms that allow flexible composition of packet processing functionalities. The key strength of Click is 
-                        its inherent extensibility of functional components: a new feature can be easily implemented by composing existing 
-                        and new modules. While Click’s flexible design has satisfied many of the demands for rapid prototyping, its internal 
-                        architecture has not caught up with potential software upgrades.
+                        The <a href="https://github.com/kohler/click">Click-driven platform</a> has been one of the most popular vnf platforms that allow flexible composition of packet-processing functionalities. The key strength of Click is its inherent extensibility for functional components: a new feature can be easily implemented by module integration. While Click’s flexible design has satisfied many demands for rapid prototyping, its internal architecture has not caught up with the potential software upgrade.
+                        
                     </p>
                 </div>
                 <div class="col-lg-4 text-left">
-                    <h3>Motivations of CLICK-UP</h3>
+                    <h3>Motivation of CLICK-UP</h3>
                     <ul class="lead">
-                        <li> <strong>Time-consuming integration</strong>: <br>
-                            The packet-processing functionalities are out-of-work during integrating new modules. It will bring several insufficiencies in
-                            quickly recover from upgrades.
+                        <li> <strong>Time-consuming integration :</strong> <br>
+                            <p class="small">
+                                The packet-processing functionalities are out-of-work during upgrade. This will bring several insufficiencies e.g. unable to quickly recover from downtime.
+                            </p>
                         </li>
-                        <li> <strong>Network state loss</strong>: <br>
-                            With no mechanism to reconstruct lost network element states, stateful functionalities may be unable to correctly process packets 
-                            after upgrades, leading to service disruption.
+                        <li> <strong>Network state loss :</strong> <br>
+                            <p class="small">
+                                With no mechanism to reconstruct lost states for network elements, stateful functionalities are unable to correctly handle packets after upgrade, leading to service disruption.
+                            </p>
                         </li>
-                        <li> <strong>Orchestration complexity</strong>: <br>
-                            Development of new modules requires intimate knowledge of complex library implementation, let alone correctly restore states. 
-                            It is frustrating that the visibility of upgrades is poor and the learning curve is rather steep.
+                        <li> <strong>Orchestration complexity :</strong> <br>
+                            <p class="small">
+                                Development of new modules requires intimate knowledge of complex library implementation, let alone correctly deal with states. It is frustrating that the visibility of current upgrade is pretty poor and the learning curve is rather steep.
+                            </p>
                         </li>
                     </ul>
                 </div>
@@ -105,11 +105,11 @@
                     <h3>CLICK-UP Offers</h3>
                     <p class="lead"> CLICK-UP, which is the effort towards software upgrades of Click-driven stateful network elements.</p>
                     <ul class="lead">
-                        <li> <strong>Low-load</strong> integrating essential modules explicitly in a service context aware manner.
+                        <li> <strong>Agile</strong> integrating essential modules explicitly in a service context aware manner during upgrade.
                         </li>
-                        <li> <strong>Stateful</strong> cares for network state maintaining during software upgrages.
+                        <li> <strong>Stateful</strong> recovery bootstrap by the state synchronization before upgrade and the state restruction after.
                         </li>
-                        <li> <strong>Friendly</strong> exoskeleton of Click modularity with a lightweight runtime library.
+                        <li> <strong>Friendly</strong> exoskeleton of Click modul -arization with a lightweight runtime library for upgrade.
                         </li>
                     </ul>
                 </div>
@@ -129,8 +129,9 @@
         <div class="container">
             <div class="row text-center">
                 <div class="col-lg-10 col-lg-offset-1">
-                    <h2>CLICK-UP Framework</h2>
-                    <hr class="small">
+                    <h2><strong>CLICK-UP Framework</strong></h2>
+                    <br>
+                    <br>
                     <div class="row">
                         <div class="col-md-3 col-sm-6">
                             <div class="service-item">
@@ -138,15 +139,18 @@
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-flask fa-stack-1x text-primary"></i>
                             </span>
+                                <br>
+                                <br>
                                 <h4>
                                     <strong>Module Integration</strong>
                                 </h4>
-                                <p>The service context aware module integration scheme of CLICK-UP.
+                                <p>The module integration scheme of service context aware in CLICK-UP.
                                     The functionality-neutral modules won't be shipped with redundantly.
                                     <br>
                                     <br>
+                                    <br>
                                 </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
+                                <a href="https://github.com/click-up/click-up" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -154,16 +158,20 @@
                                 <span class="fa-stack fa-4x">
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-shield fa-stack-1x text-primary"></i>
-                            </span>
+                                </span>
+                                <br>
+                                <br>
                                 <h4>
                                     <strong>State Safe</strong>
                                 </h4>
-                                <p>The state safe schme of CLICK-UP. This is enforced inside the integrated modules 
-                                    with a state synchronization design.
+                                <p>The state safe scheme of CLICK-UP. A state synchronization scheme 
+                                    which enforcedly integrated into modules.
+                                    <br>
+                                    <br>
                                     <br>
                                     <br>
                                 </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
+                                <a href="https://github.com/click-up/click-up" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -172,14 +180,17 @@
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-compass fa-stack-1x text-primary"></i>
                             </span>
+                                <br>
+                                <br>
                                 <h4>
                                     <strong>Runtime Library</strong>
                                 </h4>
-                                <p>The lightweight runtime library of CLICK-UP. This is embraced for clarifying service semantics, simplifying tedious
-                                    orchestration and unifying interfaces.
+                                <p>The lightweight runtime library of CLICK-UP. In order to clarify service semantics, simplifying tedious orchestration and unifying api.
+                                   <br>
+                                   <br>
                                    <br>
                                 </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
+                                <a href="https://github.com/click-up/click-up" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                         <div class="col-md-3 col-sm-6">
@@ -188,15 +199,18 @@
                                 <i class="fa fa-circle fa-stack-2x"></i>
                                 <i class="fa fa-cloud fa-stack-1x text-primary"></i>
                             </span>
+                                <br>
+                                <br>
                                 <h4>
                                     <strong>Dashboard</strong>
                                 </h4>
-                                <p>The dashboard of CLICK-UP. Operators can interact with the GUI and conduct their upgrade intends. 
+                                <p>The frontend dashboard of CLICK-UP. Operators can interact with the GUI and conduct upgrade intends. 
+                                    <br>
                                     <br>
                                     <br>
                                     <br>
                                 </p>
-                                <a href="https://github.com/click-up" class="btn btn-light">Learn More</a>
+                                <a href="https://github.com/click-up/click-up_dashboard" class="btn btn-light">Learn More</a>
                             </div>
                         </div>
                     </div>
@@ -212,7 +226,32 @@
     <!-- Callout -->
     <aside id="doc" class="callout">
         <div class="text-vertical-center">
-            <h1>Orchestrating software upgrades of stateful network elements with simpilicity, flexibility and high efficiency! </h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <h1>Orchestrating software upgrades of stateful network elements with simpilicity, flexibility and high efficiency ! </h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 text-center">
+                        <h3>More details of CLICK-UP project can be found in the document</h3>
+                        <br>
+                        <a href="doc/index.html" class="btn btn-lg btn-dark">View Document</a>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
         </div>
     </aside>
 
@@ -261,7 +300,7 @@
     </section>
     -->
 
-    <!-- Call to Action -->
+    <!-- Call to Action 
     <aside id="contact" class="call-to-action bg-primary">
         <div class="container">
             <div class="row">
@@ -272,6 +311,7 @@
             </div>
         </div>
     </aside>
+    -->
 
     <!-- Map -->
     <!--
@@ -285,7 +325,7 @@
     -->
 
     <!-- Footer -->
-    <footer>
+    <footer id="contact">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
