@@ -74,20 +74,93 @@
                     <br>
                     <br>
                     <p class="lead">
-                        In order to further demonstrate the effectiveness and convenience of CLICK-UP, we offer a software upgrade walkthrough of firewall network element. We hope to demonstrate the agility of module integration by including a large number of new modules upgraded in the demo, and checking its downtime compared to traditional manners. We also plan to demonstrate the state persistency by including tcp session states in the demo, and observing the negative influence of state loss compared to our state reconstruction case.
+                        In order to further demonstrate the effectiveness and convenience of CLICK-UP, we offer a software upgrade walkthrough on a firewall network element. We hope to demonstrate the agility of module integration by upgrading a certain number of new modules during this demo, and checking its downtime compared to the native manners. We also plan to demonstrate the state persistency by implementing tcp session states in the demo, and observing the negative influence on state loss compared to our state reconstruction case.
+                    </p>
+                    <center><iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/5G244I0LEYg?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></center>
+                    <p class="lead">
+                        <strong>During demonstration</strong>, we are going to demonstrate more details as described above by using a laptop (with dashboard and http benchmark on it) and a raspberry pi (with whitelist firewall and CLICK-UP server on it).
                     </p>
                     <p class="lead">
-                        <a href="http://hilite.me/">http://hilite.me/</a> can converts the code snippets into pretty-printed HTML format. just like:
+                        <strong>Hardware Environment :</strong>
                     </p>
-                    <p>
-                        <!-- HTML generated using hilite.me -->
-                        <div style="background: #000000; overflow:auto;width:auto;border:solid gray;border-width:.1em .1em .1em .8em;padding:.2em .6em;">
-                            <pre style="margin: 0; line-height: 125%">
-                                <span style="color: #cdcd00">print</span>
-                                <span style="color: #cd0000">&#39;hello world!&#39;</span>
-                            </pre>
-                        </div>
+                    <ul class="lead">
+                        <li>
+                            (1) A laptop connected with a wireless router (LapHost: wlan0 -- LAN).
+                        </li>
+                        <li>
+                            (2) A raspberry pi 3B connected with a wireless router (Raspi: wlan0 -- LAN).
+                        </li>
+                        <li>
+                            (3) A wireless router connecting the laptop and the raspberry pi in the LAN mode (Raspi: wlan0 -- LAN -- LapHost: wlan0).
+                        </li>   
+                    </ul>
+                    <p class="lead">
+                        <strong>Software Environment :</strong>
                     </p>
+                    <ul class="lead">
+                        <li>
+                            (1) Two virtual machines are powered on the laptop with the bridge network mode  (LapVM1: eth0 -- LAN -- LapVM2: eth0).
+                        </li>
+                        <li>
+                            (2) On one vm, <a href="https://github.com/CLICK-UP/CLICK-UP_test/tree/master/client">wgetTest.py</a> can be executed to perform the role of a http client. The script defines a job that download <a href="https://github.com/CLICK-UP/CLICK-UP_test/tree/master/server/apache-tomcat-9.0.8/webapps/clickup">50 files</a> from a http server in parallel. Each download stream is based on a stateful TCP session.
+                        </li>
+                        <li>
+                            (3) On another vm, The below commond can be executed to perform the role of a http server.
+                            <div style="background: #000000; overflow:auto;width:auto;border:solid gray;">
+                                <pre style="margin: 0; line-height: 125%">
+                                    <span style="color: #778899"># Any other version's JDK that supports Apache Tomcat</span>
+                                    <span style="color: #4169E1">[root@vm1-localhost2]#</span> <span style="color: #cd0000">sudo apt-get install openjdk-7-jre-headless</span>
+                                    <span style="color: #778899"># Enter the directory of tomcat binary</span>
+                                    <span style="color: #4169E1">[root@vm1-localhost2]#</span> <span style="color: #cd0000">sudo cd CLICK-UP_test/server/apache-tomcat-9.0.8/bin</span>
+                                    <span style="color: #778899"># Start the http server</span>
+                                    <span style="color: #4169E1">[root@vm1-localhost2]#</span> <span style="color: #cd0000">sudo sh startup.sh </span>
+                                </pre>
+                            </div>
+                        </li>
+                        <li>
+                            (4) Besides, the script gre.sh should be respectively executed on <a href="https://github.com/CLICK-UP/CLICK-UP_test/tree/master/client">vm1</a> (http client) and <a href="https://github.com/CLICK-UP/CLICK-UP_test/tree/master/server">vm2</a> (http server), so as to implement the overlay transit path. It will configure the GRE tunnel as well OpenVSwitch.
+                        </li>  
+                        <li>
+                            (5) The CLICK-UP's binary image should be programmed into the <a href="https://github.com/CLICK-UP/CLICK-UP_raspberry_pi">raspberry pi</a> in advance. <a href="https://github.com/CLICK-UP/CLICK-UP_raspberry_pi/tree/master/src">httpserver</a> can be started on the platform to perform the role of CLICK-UP server.
+                        </li>
+                        <li>
+                            (6) Similarly, the script gre.sh should be executed on <a href="https://github.com/CLICK-UP/CLICK-UP_test/tree/master/rpi">raspi</a> (CLICK-UP server). The complete overlay transit path can be represented as following:
+                            <br>
+                            LapVM1: p0(FileClient) -- LapVM1: OVS -- LapVM1: eth0(GRE) -- LAN -- RasPi: wlan0(GRE) -- RasPi: OVS -- ClickUp-NS: p1 -- CLICK-UP -- ClickUp-NS: p2 -- RasPi: OVS -- RasPi: wlan0(GRE) -- LAN -- LapVM2: eth0(GRE) -- LapVM2: p0(Fileserver). 
+                        </li>
+                        <li>
+                            (7) Finally, the <a href="https://github.com/CLICK-UP/CLICK-UP_dashboard/tree/master/dashboard">dashboard</a> of CLICK-UP is deployed on the laptop host and is connected with the CLICK-UP server (LapHost: wlan0(dashboard) -- RasPi: wlan0(CLICK-UP server)). 
+                        </li>
+                    </ul>
+
+                    <p class="lead">
+                        <strong>Walkthrough :</strong>
+                    </p>
+                    <ul class="lead">
+                        <li>
+                            (1) Open the browser and visit the page http://localhost:3000, the current atom DAG can be found if there are processing functionalities running on the CLICK-UP (or, it will be empty if there are not). 
+                        </li>
+                        <li>
+                            (2) Assume there are not any functionalities running on the CLICK-UP by now. Design a atom DAG with the orchestration as illustrated in <a href="https://github.com/CLICK-UP/CLICK-UP_test/tree/master/dashboard">type_create.txt</a>. Fill the text and refresh, the corresponding atom DAG will be shown in a graphic manner. Then, submit it to CLICK-UP server, the corresponding functionalities will be boot to provide with dedicated service after creating completion.
+                        </li>
+                        <li>
+                            (3) The service context determined by this orchestration can be represented as following:
+                            <br>
+                            fromdevice -> classifier(IP) -> strip(MAC) -> checkheader(IP) -> classifier(TCP) -> readwhitelist(State) -> sessioncheck(Firewall) -> writewhitelist(State) -> encap(0x0800, fa:fe:ca:5d:97:6c, ee:43:35:3d:55:7c) -> todevice
+                        </li>   
+                        <li>
+                            (4) When one frame goes through the network element, it is first checked the ether type. Unless IP packet, other type's MAC frame is passed. If is IP packet, the packet will be put off the MAC layer encapsulation and validated the IP header. Unless TCP flow, other type's IP packet is passed. If is TCP flow, check whether the TCP flow is on the white list. If on it, passed. Otherwise, check whether the TCP flow is within a legal session. If illegal, discard the flow. Otherwise, wirite into the white list. Finally, all passed ones are re-encapsulated with MAC layer header and sent out of the device.
+                        </li> 
+                        <li>
+                            (5) After the functionalies are online, execute the file client on vm1 and the file server on vm2. During the file transfer, try to upgrade current functionalities with a bran new orchestration. Similarly, design again a atom DAG in dashboard, refresh, submit. 
+                        </li> 
+                        <li>
+                            (6) The detailed download completion time is shown in the following figure:
+                            <p class="lead">
+                            <center><img src="../pic/download_time.png" width="100%" /></center>
+                            </p>
+                        </li> 
+                    </ul>
                 </div>
             </div>
     </div>
@@ -102,7 +175,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-left">
-                    <h2><a href="https://github.com/click-up">See Download to Get the Relevant Code</a>&nbsp;&nbsp;
+                    <h2><a href="index.html">More Documents of CLICK-UP</a>&nbsp;&nbsp;
                     </h2> 
                 </div>
 
